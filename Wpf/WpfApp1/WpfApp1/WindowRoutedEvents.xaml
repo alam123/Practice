@@ -1,0 +1,18 @@
+﻿<Window x:Class="WpfApp1.WindowRoutedEvents"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="WindowRoutedEvents" Height="450" Width="800">
+    <Grid>
+        <Button Height="50" Width="300" BorderBrush="Gray" BorderThickness="1" Click="CommonClickHandler">
+            <StackPanel Background="LightGray" Orientation="Horizontal" >
+                <Button Name="YesButton" Width="Auto" >Yes</Button>
+                <Button Name="NoButton" Width="Auto" >No</Button>
+                <Button Name="CancelButton" Width="Auto" Click="CancelButton_Click" >Cancel</Button>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>
