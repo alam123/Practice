@@ -1,5 +1,5 @@
 #Alternate CRR
-#Q = MAX(0, ST2-ST1)
+#Q = MAX(0, ST-K)
 #A[n+1] = A[n] * exp (mu * dt + sigma * sqrt(dt) * x[n])
 
 simCRR <- function(T, N, mu, sigma, r) {
@@ -25,47 +25,40 @@ simCRR <- function(T, N, mu, sigma, r) {
 }
 
 
-T1 = 0.3;
-T2 = 1.0;
+T = 1.0;
 N = 1000;
 dt = T2 / N;
 sigma = 0.5
 mu = 0.1
 r = 0.01
-alpha = 0.8
 S0 = 100
+K = 20
 
 #closed form solution
-#V0 = S0 * (phi(d1) - alpha * phi(d2))
-#d1 = (ln(1/alpha) + (r + 0.5*sigma^2)(T2-T1))/(sigma*(sqrt(T2-T1))
-#d2 = (ln(1/alpha) + (r - 0.5*sigma^2)(T2-T1))/(sigma*(sqrt(T2-T1))
+#V0 = S0 * phi(d1) - K * exp(-r*T) * phi(d2))
+#d1 = (ln(S0/K) + (r + 0.5*sigma^2)(T2-T1))/(sigma*(sqrt(T2-T1))
+#d2 = (ln(S0/K) + (r - 0.5*sigma^2)(T2-T1))/(sigma*(sqrt(T2-T1))
 
-d1 <- (log(1 / alpha) + (r + 0.5 * sigma ^ 2) * (T2 - T1)) / (sigma * (sqrt(T2 - T1)))
-d2 <- (log(1 / alpha) + (r - 0.5 * sigma ^ 2) * (T2 - T1)) / (sigma * (sqrt(T2 - T1)))
-V0C <- S0 * (pnorm(d1) - alpha * pnorm(d2))
+d1 <- (log(S0 / K) + (r + 0.5 * sigma ^ 2) * T) / (sigma * (sqrt(T)))
+d2 <- (log(S0 / K) + (r - 0.5 * sigma ^ 2) * T) / (sigma * (sqrt(T)))
+V0C <- S0 * pnorm(d1) - K * exp(-r * T) * pnorm(d2)
 
 sprintf("d1=%f d2=%f V0=%f", d1, d2, V0C)
 
 # generate many paths
 M <- 5000;
 SqT <- rep(0, M);
-strikes <- rep(0, M);
 VT <- rep(0, M);
 
 for (i in 1:M) {
     res <- simCRR(T2, N, mu, sigma, r);
     SqT[i] <- res[N];
-    strikes[i] <- res[T1 * N]
-    VT[i] = max(0, res[N] - alpha * res[T1 * N])
+    VT[i] = max(0, S0 * res[N] - K)
 }
 
-length(res)
-
-V0M <- S0 * exp(-r * T2) * mean(VT)
+V0M <- exp(-r * T) * mean(VT)
 sprintf("V0M=%f", V0M)
 
 par(mfrow = c(2, 1))
-p1 <- hist(strikes, breaks = seq(0, 10, 0.1))
-p2 <- hist(VT, breaks = seq(0, 10, 0.1))
-plot(strikes, col = "green") # first histogram
-plot(VT, col = "red") # second
+plot(VT, col = "green") # first histogram
+hist(VT, col = "red") # second

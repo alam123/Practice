@@ -37,8 +37,6 @@ sigma <- 0.5
 mu <- 0.1
 r <- 0.01
 
-result <- simCRR(T, N, mu, sigma, r)
-
 # generate many paths
 M <- 5000;
 SpT <- rep(0, M);
