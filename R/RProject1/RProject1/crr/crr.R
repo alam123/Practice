@@ -4,7 +4,7 @@ simCRR <- function(T, N, mu, sigma, r) {
 
     # branching probabilities
     p <- 0.5 * (1 + mu / sigma * sqrt(dt));
-    q <- 0.5 * (1 + (r - 0.5 * sigma ^ 2) / sigma * sqrt(dt));
+    q <- 0.5 * (1 + ((r - 0.5 * sigma ^ 2) / sigma) * sqrt(dt));
 
     # generate Bernoullis
     u <- runif(N);
@@ -17,10 +17,6 @@ simCRR <- function(T, N, mu, sigma, r) {
     Sq <- rep(0, N)
     Sp[1] <- 1;
     Sq[1] <- 1;
-
-    sapply(Sp, function(x) {
-
-    })
 
     for (i in 2:N) {
         Sp[i] <- Sp[1] * exp(sigma * sqrt(dt) * cumxp[i - 1]);
