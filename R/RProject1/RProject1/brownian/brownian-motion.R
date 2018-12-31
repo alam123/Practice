@@ -5,7 +5,7 @@ simBrownian <- function(T, N) {
     dt <- T / N;
 
     X <- rnorm(N, 0, 1);
-    cumx <- cumsum(x);
+    cumx <- cumsum(X);
 
     X <- rep(0, N)
 
