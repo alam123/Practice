@@ -54,9 +54,9 @@ for (i in 1:M) {
 
 
 par(mfrow = c(3, 1))
-hist(IGdW, xlab = "time", ylab = "IGdW", col = "red");
-hist(IHdW, xlab = "time", ylab = "IHdW", col = "green");
-hist(IGHdT, xlab = "time", ylab = "IGHdT", col = "purple");
+hist(IGdW, xlab = "time", ylab = "IGdW", col = "red", breaks = 100);
+hist(IHdW, xlab = "time", ylab = "IHdW", col = "green", breaks = 100);
+hist(IGHdT, xlab = "time", ylab = "IGHdT", col = "purple", breaks = 100);
 
 mean(IGdW)
 mean(IHdW)
