@@ -2,7 +2,7 @@
 #Q branching probability = 1/2, Q(x=1,x=-1) = 1/2
 #theta calibrated from bond prices
 
-simHooLee <- function(T, N, mu, sigma) {
+simHoLee <- function(T, N, mu, sigma) {
     dv <- rep(0, N)
     r <- rep(0, N)
     # Ho-Lee Short Rate Model
@@ -20,7 +20,7 @@ dt = T / N;
 sigma <- 0.5
 mu <- 0.1
 
-simHooLee(T, mu, sigma, r)
+simHoLee(T, mu, sigma, r)
 
 plot(t, r, type = "l", col = "blue", xlab = "Time", ylab = "Instantaneous Short Rate",
        main = "Simulation of a One Factor Short-Rate Model 
