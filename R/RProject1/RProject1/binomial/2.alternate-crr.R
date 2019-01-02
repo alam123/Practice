@@ -32,14 +32,14 @@ simCRR <- function(T, N, mu, sigma, r) {
 
 
 T = 1;
-N = 1000;
+N = 100;
 dt = T / N;
 sigma <- 0.5
 mu <- 0.1
 r <- 0.01
 
 # generate many paths
-M <- 5000;
+M <- 100;
 SpT <- rep(0, M);
 SqT = rep(0, M);
 for (i in 1:M) {

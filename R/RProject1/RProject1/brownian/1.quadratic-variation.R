@@ -17,7 +17,7 @@ simItos <- function(T, N) {
 }
 
 T <- 10;
-N <- 100000;
+N <- 1000;
 dt <- T / N;
 
 res <- simItos(T, N);

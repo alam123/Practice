@@ -1,9 +1,9 @@
 G <- function(t) {
-    return (t ^ 2 + t);
+    return (sin(t) ^ 2 + t);
 }
 
 H <- function(t) {
-    return(t ^ 3 + t);
+    return(t ^ 3 + t - t / 2);
 }
 
 simItosIsemetry <- function(T, N) {
