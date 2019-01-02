@@ -1,29 +1,13 @@
 # W = z * sqrt(dt), z ~ N(0,1)
 
-simBrownian <- function(T, N) {
-    # tim step size
-    dt <- T / N;
-
-    X <- rnorm(N, 0, 1);
-    cumx <- cumsum(X);
-
-    X <- rep(0, N)
-
-    for (i in 2:N) {
-        X[i] <- sqrt(dt) * cumx[i - 1];
-    }
-
-    return(B = X);
-}
-
 T <- 10;
 N <- 1000;
 dt <- T / N;
 
-res <- simBrownian(T, N);
-
+#res <- simBrownian(T, N);
+res <- rnorm(N, 0, sqrt(dt))
 # generate many paths
-M <- 1000;
+M <- 3000;
 ST <- rep(0, M);
 for (i in 1:M) {
     res <- simBrownian(T, N);

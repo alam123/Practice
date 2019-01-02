@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "RProject1", "RProject1\RProject1.rxproj", "{8A860855-C5F6-4667-B0F9-FCE9763B1998}"
+Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "RProject", "RProject\RProject.rxproj", "{8A860855-C5F6-4667-B0F9-FCE9763B1998}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
