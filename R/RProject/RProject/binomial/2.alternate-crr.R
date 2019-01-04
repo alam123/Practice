@@ -7,7 +7,6 @@ simCRR <- function(T, N, mu, sigma, r) {
 
     # branching probabilities
     p <- 0.5
-    #q <- 0.5 * (1 + (r - mu) / sigma * sqrt(dt));
     q <- 0.5 * (1 + ((r - mu) / sigma) * sqrt(dt));
 
     # generate Bernoullis
@@ -17,14 +16,12 @@ simCRR <- function(T, N, mu, sigma, r) {
     cumxp <- cumsum(xp);
     cumxq <- cumsum(xq);
 
-    Sp <- rep(0, N)
-    Sq <- rep(0, N)
-    Sp[1] <- 1;
-    Sq[1] <- 1;
+    Sp <- rep(1, N)
+    Sq <- rep(1, N)
 
     for (i in 2:N) {
-        Sp[i] <- Sp[1] * exp((mu - 0.5 * sigma ^ 2) * dt * i + sigma * sqrt(dt) * cumxp[i - 1]);
-        Sq[i] <- Sq[1] * exp((mu - 0.5 * sigma ^ 2) * dt * i + sigma * sqrt(dt) * cumxq[i - 1]);
+        Sp[i] <- Sp[1] * exp((mu - 0.5 * (sigma ^ 2)) * dt * i + sigma * sqrt(dt) * cumxp[i - 1]);
+        Sq[i] <- Sq[1] * exp((mu - 0.5 * (sigma ^ 2)) * dt * i + sigma * sqrt(dt) * cumxq[i - 1]);
     }
 
     return(list(Sp = Sp, Sq = Sq));
@@ -32,14 +29,14 @@ simCRR <- function(T, N, mu, sigma, r) {
 
 
 T = 1;
-N = 100;
+N = 1000;
 dt = T / N;
 sigma <- 0.5
 mu <- 0.1
 r <- 0.01
 
 # generate many paths
-M <- 100;
+M <- 5000;
 SpT <- rep(0, M);
 SqT = rep(0, M);
 for (i in 1:M) {
@@ -49,13 +46,11 @@ for (i in 1:M) {
 }
 
 par(mfrow = c(2, 1))
-p1 <- hist(SpT, breaks = seq(0, 10, 0.1))
-p2 <- hist(SqT, breaks = seq(0, 10, 0.1))
-plot(p1, col = "green") # first histogram
-plot(p2, col = "red") # second
-plot(p1, col = "green", add = T) # second
 
-mean(SpT)
-exp(mu)
-mean(SqT)
-exp(r)
+hist(SpT, col = "green", breaks = 100)
+legend("topleft", c(gettextf("mu = %f,  sigma = %f", (mu - 0.5 * (sigma ^ 2)) * T, (sigma ^ 2) * T), gettextf("mu = %f,  sigma = %f", mean(log(SpT)), sd(log(SpT)) ^ 2)), cex = 0.8, col = c("red", "green"), pch = 1, lty = 1);
+
+hist(SqT, col = "green", breaks = 100)
+hist(SpT, col = "blue", breaks = 100, add = T)
+legend("topleft", c(gettextf("mu = %f,  sigma = %f", (r - 0.5 * (sigma ^ 2)) * T, (sigma ^ 2) * T), gettextf("mu = %f,  sigma = %f", mean(log(SqT)), sd(log(SqT)) ^ 2)), cex = 0.8, col = c("red", "green"), pch = 1, lty = 1);
+

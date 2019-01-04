@@ -35,7 +35,7 @@ for (i in 2:M) {
 
 par(mfrow = c(2, 1), mar = c(1, 1, 1, 1))
 hist(B, col = "green", breaks = 100)
-legend("topleft", c(gettextf("mu = %f,  sigma = %f", 0, sigma), gettextf("mu = %f,  sigma = %f", mean(B), sd(B) ^ 2)), cex = 0.8, col = c("red", "green"), pch = 1, lty = 1);
+legend("topleft", c(gettextf("mu = %f,  sigma = %f", 0, T), gettextf("mu = %f,  sigma = %f", mean(B), sd(B) ^ 2)), cex = 0.8, col = c("red", "green"), pch = 1, lty = 1);
 
 hist(Q, col = "blue", breaks = 100)
-legend("topleft", c(gettextf("mu = %f,  sigma = %f", lambda * T, sigma), gettextf("mu = %f,  sigma = %f", mean(Q), sd(Q) ^ 2)), cex = 0.8, col = c("red", "green"), pch = 1, lty = 1);
+legend("topleft", c(gettextf("mu = %f,  sigma = %f", lambda * T, T), gettextf("mu = %f,  sigma = %f", mean(Q), sd(Q) ^ 2)), cex = 0.8, col = c("red", "green"), pch = 1, lty = 1);

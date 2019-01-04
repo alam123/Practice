@@ -4,7 +4,7 @@ simCRR <- function(T, N, mu, sigma, r) {
 
     # branching probabilities
     p <- 0.5 * (1 + mu / sigma * sqrt(dt));
-    q <- 0.5 * (1 + ((r - 0.5 * sigma ^ 2) / sigma) * sqrt(dt));
+    q <- 0.5 * (1 + ((r - 0.5 * (sigma ^ 2)) / sigma) * sqrt(dt));
 
     # generate Bernoullis
     u <- runif(N);
@@ -47,15 +47,11 @@ for (i in 1:M) {
 }
 
 par(mfrow = c(2, 1))
-p1 <- hist(SpT, breaks = seq(0, 10, 0.1))
-p2 <- hist(SqT, breaks = seq(0, 10, 0.1))
-plot(p1, col = "green") # first histogram
-plot(p2, col = "red") # second
-plot(p1, col = "green", add = T) # second
 
-mean(SpT)
-exp(mu)
-sd(SpT)
-mean(SqT)
-exp(r)
-sd(SqT)
+hist(SpT, col = "green", breaks = 100)
+legend("topleft", c(gettextf("mu = %f,  sigma = %f", mu * T, (sigma ^ 2) * T), gettextf("mu = %f,  sigma = %f", mean(log(SpT)), sd(log(SpT)) ^ 2)), cex = 0.8, col = c("red", "green"), pch = 1, lty = 1);
+
+hist(SqT, col = "green", breaks = 100)
+hist(SpT, col = "blue", breaks = 100, add = T)
+legend("topleft", c(gettextf("mu = %f,  sigma = %f", (r - 0.5 * (sigma ^ 2)) * T, (sigma ^ 2) * T), gettextf("mu = %f,  sigma = %f", mean(log(SqT)), sd(log(SqT)) ^ 2)), cex = 0.8, col = c("red", "green"), pch = 1, lty = 1);
+
