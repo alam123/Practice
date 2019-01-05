@@ -30,13 +30,10 @@ for (i in 1:M) {
     W.W[i] = W[N] ^ 2;
 }
 
-sprintf("Mean=%f Variance=%f", T , 2 * T ^ 2)
-sprintf("Mean=%f Variance=%f", mean(W.W), sd(W.W) ^ 2)
-
 par(mfrow = c(2, 1))
-hist(W, col = "green")
-hist(W.W, col = "blue")
-
+hist(W, col = "green", breaks = 100)
+hist(W.W, col = "blue", breaks = 100)
+legend("topleft", c(gettextf("mu = %f,  sigma = %f", T, 2 * T ^ 2), gettextf("mu = %f,  sigma = %f", mean(W.W), sd(W.W) ^ 2)), cex = 0.8, col = c("red", "green"), pch = 1, lty = 1);
 
 #WT.WS
 
@@ -57,10 +54,8 @@ for (i in 1:M) {
     WT.WS[i] = WT[N] * WS[(S / T) * N];
 }
 
-sprintf("Mean=%f Variance=%f", S, S * (T + S))
-sprintf("Mean=%f Variance=%f", mean(WT.WS), sd(WT.WS) ^ 2)
-
 par(mfrow = c(3, 1))
 hist(WT, col = "red")
-hist(WS, col = "green")
-hist(WT.WS, col = "blue")
+hist(WS, col = "green", breaks = 100)
+hist(WT.WS, col = "blue", breaks = 100)
+legend("topleft", c(gettextf("mu = %f,  sigma = %f", S, S * (T + S)), gettextf("mu = %f,  sigma = %f", mean(WT.WS), sd(WT.WS) ^ 2)), cex = 0.8, col = c("red", "green"), pch = 1, lty = 1);
